@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+    <!-- <h1>Welcome to my blog!</h1> -->
+    {% block content %}
+    <section>
+        <h2>{{ entry.blogTitle }}</h2>
+        <h5>{{ entry.publishDate }}</h5>
+        <!-- <h5>{{ entry.id }}</h5> -->
+        <p>{{ entry.blogBody }}</p>
+        <br>
+        {% if user.is_authenticated %}
+        <a href="{% url 'blog:update-entry' entry.id%}" class="btn btn-secondary"><button>Edit</button></a>
+        <a href="{% url 'blog:delete-entry' entry.id%}"><button>Delete</button></a>
+        {% endif %}
+        <br>
+        <br>
+        <h3>Comments:</h3>
+        <br>
+        {% if not comments%}
+        <p>No comments yet...</p>
+        {% else %}
+            {% for comm in comments %}
+            <h5>{{ comm.userCom }}</h5>
+            <p>{{ comm.commBody }}</p>
+            <br>
+                {% if user.is_authenticated %}
+            <a href="{% url 'blog:delete-comment' entry.id comm.id%}">Delete Comment</a>
+                {% endif %}
+            {% empty %}
+            {% endfor %}
+        {% endif %}
+    </section>
+    <form role="form" action="" method="POST">
+        {% csrf_token %}
+        <h4>Leave a comment below:</h4>
+        <p style="display: none">{{ newComment.blog }}</p>
+        <label for="">Input username here:</label>
+        {{ newComment.userCom }}
+        <br>
+        <label for="">Input text:</label>
+        {{ newComment.commBody }}
+        <br>
+		<button class="btn btn-secondary" type="submit">Save</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<section>
+    <h2>Create new blog post</h2>
+    <form role="form" action="" method="POST" id="newEntryForm">
+        {% csrf_token %}
+        <label for="">Input title here:</label>
+        {{ new_entry.blogTitle }}
+        <br>
+        <label for="">Input text:</label>
+        {{new_entry.blogBody}}
+        <br>
+        <!-- <label for="">Input date:</label> -->
+        <!-- {{new_entry.publishDate}} -->
+		<button class="btn btn-secondary" type="submit">Save</button>
+    </form>
+</section>
+{% endblock %}

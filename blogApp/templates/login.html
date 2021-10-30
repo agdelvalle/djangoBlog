@@ -1,0 +1,19 @@
+{% extends 'base_v2.html' %}
+    {% block content %}
+    <div id="loginForm">
+        <form class="form-signin" method="POST" action="{% url 'auth_login' %}" role="form">
+            {% csrf_token %}
+
+            {{ form.errors }}
+
+            {{ form.username.label }}
+            {{ form.username }}
+
+            {{ form.password.label }}
+            {{ form.password }}
+            
+            <button class="btn btn-sm btn-secondary" type="submit">Sign in</button>
+            <input type="hidden" name="next" value="{% url 'blog:index' %}" />
+        </form>
+    </div>
+    {% endblock %}

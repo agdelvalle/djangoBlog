@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+<!-- <h1>Welcome to my blog!</h1> -->
+{% block content %}
+<section>
+    <h2>Edit blog post</h2>
+    <form role="form" action="" method="POST">
+    {% csrf_token %}
+        <h2>{{ newEntry.blogTitle }}</h2>
+        <h5>{{ newEntry.publishDate }}</h5>
+        <h5>{{ newEntry.id }}</h5>
+        <p>{{ newEntry.blogBody }}</p>
+        <button class="btn btn-secondary" type="submit">Save Changes</button>
+    </form>
+</section>
+{% endblock %}
